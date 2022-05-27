@@ -9,8 +9,8 @@ class MainController extends Controller
 {
     public function index()
     {
-        $user = User::where('role', 'seller')->first();
+        $seller = User::where('role', 'seller')->first();
 
-        dd($user);
+        dd($seller->sales);
     }
 }
