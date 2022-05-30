@@ -13,6 +13,12 @@ class Product extends Model
         'name',
         'image',
         'price',
-        'stock'
+        'original_stock',
+        'actual_stock'
     ];
+
+    public function product_sale()
+    {
+        return $this->hasOne(ProductSale::class);
+    }
 }

@@ -4,6 +4,9 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\MainController;
+use App\Http\Controllers\ManagementController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,17 +20,11 @@ use App\Http\Controllers\MainController;
 */
 
 Route::get('/', [MainController::class, 'index'])->name('index');
-Route::middleware('auth:sanctum')->prefix('/management')->group(function () {
-    Route::get('index', function (\Illuminate\Http\Request $request){
-        $user = \Illuminate\Support\Facades\Auth::user();
-        if ($user->role == 'admin') {
-            echo "Hola admin";
-        }
-        else if ($user->role == 'manager') {
-            echo "Hola manager";
-        }
-        else {
-            echo "Hola vendedor";
-        }
-    });
+Route::middleware('auth:sanctum')->prefix('management')->name('management.')->group( function () {
+    Route::get('/index', [ManagementController::class, 'index'])->name('index');
+    Route::resource('product', ProductController::class);
+    Route::post('confirm-delete', [MainController::class, 'confirmPassword'])->name('confirm_password');
 });
+
+Route::post('management-login', [AuthController::class, 'login'])->name('management_login');
+Route::post('management-logout', [AuthController::class, 'logout'])->name('management_logout');
