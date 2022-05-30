@@ -12,8 +12,8 @@ class Sale extends Model
     protected $fillable = [
         'token',
         'seller_id',
+        'seller_name',
         'customer',
-        'product_name',
         'total_stock',
         'total_price'
     ];
@@ -21,5 +21,10 @@ class Sale extends Model
     public function user()
     {
         return $this->belongsTo(User::class)->where('role', 'seller');
+    }
+
+    public function products()
+    {
+        return $this->belongsToMany(Product::class, 'product_sale', 'sale_id', 'product_id')->withPivot('sale_id', 'product_id','total_stock');
     }
 }

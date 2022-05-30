@@ -64,4 +64,12 @@ class User extends Authenticatable
     {
         return $this->hasMany(Sale::class, 'seller_id', 'id');
     }
+
+    public function hasRole($role)
+    {
+        if ($role == $this->role) {
+            return $this->role;
+        }
+        return null;
+    }
 }

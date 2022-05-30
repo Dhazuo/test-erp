@@ -2,6 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\Customer;
+use App\Models\Product;
+use App\Models\ProductSale;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -45,5 +48,25 @@ class DatabaseSeeder extends Seeder
                'role' => $user['role']
             ]);
         }
+
+        Product::factory(50)->create();
+
+        for ($i = 1; $i <= 50; $i++) {
+            DB::table('product_history')->insert([
+                'product_id' => $i,
+                'total_sales' => random_int(0, 5000),
+                'total_gains' => 0
+            ]);
+        }
+
+        $products_sales = ProductSale::all();
+
+        foreach ($products_sales as $product) {
+            $p = Product::where('id', $product->product_id)->first();
+            $product->total_gains = $product->total_sales * $p->price;
+            $product->save();
+        }
+
+        Customer::factory(10)->create();
     }
 }

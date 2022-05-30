@@ -17,10 +17,12 @@ return new class extends Migration
             $table->id();
             $table->string('token');
             $table->unsignedBigInteger('seller_id');
+
+            $table->string('seller_name');
             $table->string('customer');
-            $table->string('product_name');
             $table->integer('total_stock');
             $table->float('total_price');
+            $table->enum('status', ['active', 'pending_to_delete'])->default('active');
 
             $table->foreign('seller_id')->references('id')->on('users');
             $table->timestamps();

@@ -17,7 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->float('price');
-            $table->integer('stock');
+            $table->integer('original_stock');
+            $table->integer('actual_stock');
             $table->timestamps();
         });
     }

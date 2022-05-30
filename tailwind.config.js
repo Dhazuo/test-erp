@@ -14,6 +14,28 @@ module.exports = {
             fontFamily: {
                 sans: ['Nunito', ...defaultTheme.fontFamily.sans],
             },
+            colors: {
+                main: {
+                    'DEFAULT': '#FF9408',
+                    '50': '#fffaf3',
+                    '100': '#fff4e6',
+                    '200': '#ffe4c1',
+                    '300': '#ffd49c',
+                    '400': '#ffb452',
+                    '500': '#ff9408',
+                    '600': '#e68507',
+                    '700': '#bf6f06',
+                    '800': '#995905',
+                    '900': '#7d4904'
+                },
+                focus: {
+                    'DEFAULT': '#facc15',
+                    'error': '#dc3545'
+                },
+                backgroundImage: theme => ({
+                    'fruits': "url('/images/frutas.jpg')",
+                }),
+            }
         },
     },
 

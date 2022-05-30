@@ -13,6 +13,17 @@ class Product extends Model
         'name',
         'image',
         'price',
-        'stock'
+        'original_stock',
+        'actual_stock'
     ];
+
+    public function product_sale()
+    {
+        return $this->hasOne(ProductSale::class);
+    }
+
+    public function sales()
+    {
+        return $this->belongsToMany(Sale::class, 'product_sale', 'product_id', 'sale_id')->withPivot('product_id', 'sale_id','total_stock');
+    }
 }
